@@ -1,0 +1,96 @@
+set nocompatible "解决新老版本插件不兼容性问题
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on "以上4行是为了让vim识别不同文件格式
+
+set mouse= "可以使用鼠标
+set encoding=utf-8 "编码
+let &t_ut='' "解决有些终端配色不对问题
+
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2 "这几行更改tab缩进长度
+
+set list
+set listchars=tab:▸\ ,trail:▫  "这两行可以显示行尾空格
+
+set scrolloff=5
+set tw=0
+set indentexpr=   "这几行是关于缩进的
+
+set backspace=indent,eol,start  "让我的退格键可以回到上一行
+
+set foldmethod=indent
+set foldlevel=99      "这两行是关于把代码收起来的方式
+
+let &t_SI.="\e[5 q" "SI = INSERT mode
+let &t_SR.="\e[4 q" "SR = REPLACE mode
+let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
+
+"上面这三行是让你的光标在不同模式下显示不同样式
+"Cursor settings:
+
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+
+
+set laststatus=2 "让底下的状态栏显示
+set autochdir  "可以自动切换工作目录
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif  "打开文件让光标停留在上一次关闭的位置
+
+
+syntax on  "代码高亮
+set number "显示行号
+set relativenumber "显示相对行号
+set cursorline "光标位置显示一条线
+set wrap "字不会超出我当前行所在的位置，会自动换行
+set showcmd "显示输入的命令
+set wildmenu "按下tab键提供补全命令
+set hlsearch "显示搜索高亮
+exec "nohlsearch"
+set incsearch "边输入边高亮
+set ignorecase "忽略大小写
+set smartcase "智能大小写
+set showmatch "显示匹配的括号
+set paste "解决黏贴乱序问题
+set ai "自动对其
+set clipboard=unnamedplus "使用系统剪切板
+call plug#begin('~/.vim/plugged')
+
+Plug 'https://github.com/connorholyday/vim-snazzy'
+Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'Valloric/YouCompleteMe'
+Plug 'https://github.com/preservim/nerdtree'
+call plug#end()
+
+let g:SnazzyTransparent = 1
+colorscheme snazzy
+
+" ===
+" === You Complete ME
+" ===
+let g:ycm_autoclose_preview_window_after_completion=0
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_use_clangd = 0
+let g:ycm_python_interpreter_path = "/usr/bin/python3"
+let g:ycm_python_binary_path = "/usr/bin/python3"
+
+" ===
+" === NERDTRee
+" ===
+"let NERDTreeMapOpenExpl = ""
+"let NERDTreeMapUpdir = ""
+"let NERDTreeMapUpdirKeepOpen = "l"
+"let NERDTreeMapOpenSplit = ""
+"let NERDTreeOpenVSplit = ""
+"let NERDTreeMapActivateNode = "i"
+"let NERDTreeMapOpenInTab = "o"
+"let NERDTreeMapPreview = ""
+"let NERDTreeMapCloseDir = "n"
+"let NERDTreeMapChangeRoot = "y"
